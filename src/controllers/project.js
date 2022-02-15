@@ -2,7 +2,7 @@ import Project from "../models/project"
 
 export const getAllProject = async (req, res) => {
     try {
-        const Projects = await Project.find({}).populate('projectId')
+        const Projects = await Project.find({})
         res.status(200).json({
             success: true,
             Projects

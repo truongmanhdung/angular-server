@@ -5,8 +5,8 @@ import { isAdmin, isAuth } from '../middlewares/CheckAuth';
 const router = express.Router();
 
 
-router.get('/projects',isAuth, isAdmin, getAllProject);
-router.post('/project', isAuth, createProject);
-router.post('/project/:id', isAuth, updateProject);
-router.post('/project/:id', isAuth, deleteProject);
+router.get('/projects', getAllProject);
+router.post('/project', createProject);
+router.post('/project/:id', updateProject);
+router.post('/project/:id', deleteProject);
 module.exports = router;
