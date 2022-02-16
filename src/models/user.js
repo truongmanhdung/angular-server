@@ -25,6 +25,10 @@ const userSchema = new mongoose.Schema({
     },
     salt: {
         type: String
+    },
+    avatar: {
+        type: String,
+        default: 'https://w7.pngwing.com/pngs/419/473/png-transparent-computer-icons-user-profile-login-user-heroes-sphere-black-thumbnail.png'
     }
 }, { timestamps: true });
 

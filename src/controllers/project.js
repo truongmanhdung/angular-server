@@ -44,9 +44,12 @@ export const updateProject = async (req, res) => {
 }
 
 export const deleteProject = async (req, res) => {
+    console.log(req.params.id);
 
     try {
-        const DeleteConditions = { _id: req.params.id, userId: req.userId}
+        // const DeleteConditions = { _id: req.params.id, userId: req.userId}
+        console.log(req.params.id);
+        const DeleteConditions = { _id: req.params.id}
         const deleteProject = await Project.findOneAndDelete(DeleteConditions)
         if(!deleteProject){
             return res.status(401).json({success: false, message: 'User not authorised to delete Project'})

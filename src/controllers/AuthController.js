@@ -75,3 +75,9 @@ export const signout = (req,res) => {
         message: "Đăng xuất thành công"
     })
 }
+
+
+export const getUsers = async(req, res) => {
+    const users = await User.find({})
+    res.json(users)
+}
