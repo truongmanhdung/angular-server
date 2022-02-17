@@ -16,7 +16,7 @@ mongoose.connect(process.env.DATABASE)
 // middleware
 app.use(morgan("tiny"));
 app.use(express.json())
-app.use(cors())
+app.use(cors()) 
 
 
 // Route

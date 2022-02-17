@@ -12,6 +12,20 @@ export const getAllProject = async (req, res) => {
     }
 }
 
+
+export const getOneProject = async (req, res) => {
+    console.log(req.params.id);
+    try {
+        const project = await Project.findOne({_id: req.params.id})
+        res.status(200).json({
+            success: true,
+            project
+        })
+    } catch (error) {
+        res.status(500).json({ success: false, message: "Internal server error" });
+    }
+}
+
 export const createProject = async (req, res) => {
     const {projectName} = req.body
     if(!projectName){

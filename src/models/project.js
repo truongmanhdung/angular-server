@@ -10,11 +10,11 @@ const projectSchema = new mongoose.Schema({
         type: Number
     },
     startDate: {
-        type: Date,
+        type: String,
         default: new Date()
     },
     endDate: {
-        type: Date,
+        type: String,
         default: new Date()
     },
     project_money: {
