@@ -5,8 +5,8 @@ import { isAuth } from '../middlewares/CheckAuth';
 const router = express.Router();
 
 
-router.get('/task',isAuth, getAllTask);
-router.post('/task', isAuth, createTask);
-router.post('/task/:id', isAuth, updateTask);
-router.post('/task/:id', isAuth, deleteTask);
+router.get('/task', getAllTask);
+router.post('/task',  createTask);
+router.post('/task/:id',  updateTask);
+router.post('/task/:id',  deleteTask);
 module.exports = router;

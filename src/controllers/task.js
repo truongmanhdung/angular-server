@@ -2,7 +2,10 @@ import Task from "../models/task"
 
 export const getAllTask = async (req, res) => {
     try {
-        const tasks = await Task.find({}).populate('projectId')
+        const tasks = await Task.find({}).populate('projectId').populate({
+            path: "watcher",
+            populate: { path: "userId" },
+          });
         res.status(200).json({
             success: true,
             tasks

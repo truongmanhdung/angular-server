@@ -28,8 +28,17 @@ export const currentUser = (req, res) => {
 
 export const signup = async (req,res) => {
     try {
-        const user = await new User(req.body).save();
-        res.json(user);
+        const userData = await User.findOne({email: req.body.email})
+        if(userData){
+            res.json({
+                error: error,
+                messenger: "Email đã có người sử dụng, vui lòng thử lại"
+            });
+        }else{
+            const user = await new User(req.body).save();
+            res.json(user);
+        }
+        
     } catch (error) {
         res.json({
             error: error,

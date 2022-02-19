@@ -10,10 +10,9 @@ const userSchema = new mongoose.Schema({
         required: true,
         index: true
     },
-    picture: String,
     role: {
         type: String,
-        default: 'subscriber'
+        default: 'member'
     },
     history: {
         type: Array,
@@ -30,7 +29,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: 'https://w7.pngwing.com/pngs/419/473/png-transparent-computer-icons-user-profile-login-user-heroes-sphere-black-thumbnail.png'
     }
-}, { timestamps: true });
+}, { timestamps: true, collection: 'Users' });
 
 userSchema.virtual('password')
     .set(function (password) {
@@ -54,4 +53,4 @@ userSchema.methods =  {
 }
 
 
-export default mongoose.model('User', userSchema);
+export default mongoose.model('Users', userSchema);

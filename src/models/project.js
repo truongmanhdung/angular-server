@@ -9,11 +9,15 @@ const projectSchema = new mongoose.Schema({
     teamSize: {
         type: Number
     },
+    member: [
+        {
+            userId: {
+                type: ObjectId,
+                ref: "Users"
+            },
+        }
+    ],
     startDate: {
-        type: String,
-        default: new Date()
-    },
-    endDate: {
         type: String,
         default: new Date()
     },
@@ -21,7 +25,7 @@ const projectSchema = new mongoose.Schema({
         type: Number,
         default: 1000000
     }
-}, { timestamps: true });
+}, { timestamps: true, collection: 'projects' });
 
 
 export default mongoose.model('projects', projectSchema);
