@@ -10,10 +10,6 @@ const taskSchema = new mongoose.Schema(
     desc: {
       type: String,
     },
-    assignee: {
-      type: ObjectId,
-      ref: "Users",
-    },
     watcher: [
         {
             userId: {
