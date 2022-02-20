@@ -56,6 +56,25 @@ export const createTask = async (req, res) => {
   }
 };
 
+export const getOneTask = async (req, res) => {
+  console.log(req.params.id);
+  try {
+    const task = await Task.findOne({ _id: req.params.id }).populate("projectId")
+    .populate({
+      path: "watcher",
+      populate: {
+        path: "userId",
+      },
+    });
+    res.status(200).json({
+      success: true,
+      task,
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: "Internal server error" });
+  }
+};
+
 export const updateTask = async (req, res) => {
   const { nameTask } = req.body;
   if (!nameTask) {
