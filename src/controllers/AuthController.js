@@ -68,9 +68,10 @@ export const signin = async (req,res) => {
         token,
         user: {
             _id: user._id,
-            full_name: user.full_name,
+            name: user.name,
             role: user.role,
-            avatar: user.avatar
+            avatar: user.avatar,
+            email: user.email
         }
     });
 }
@@ -86,7 +87,20 @@ export const signout = (req,res) => {
 }
 
 
-export const getUsers = async(req, res) => {
+export const getUsers = async (req, res) => {
     const users = await User.find({})
     res.json(users)
+}
+
+export const updateUser = async (req, res) => {
+    try {
+        const UpdateConditions = { _id: req.params.id}
+        const updateUser = await User.findOneAndUpdate(UpdateConditions, req.body, {new: true})
+        if(!updateUser){
+            return res.status(401).json({success: false, message: 'User not authorised to update user'})
+        }
+        return res.status(200).json({success: true, message: 'User updated user successfully', user: updateUser})
+    } catch (error) {
+        res.status(500).json({ success: false, message: "Internal server error" });
+    }
 }
