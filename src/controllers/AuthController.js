@@ -18,12 +18,13 @@ export const createOrUpdateUser = async (req, res) => {
         res.json(newUser);
     }
 }
-export const currentUser = (req, res) => {
-    const { email } = req.body;
-    User.findOne({ email }).exec((err, user) => {
-        if (err) throw new Error(err)
-        res.json(user)
-    });
+export const currentUser = async (req, res) => {
+    const { _id } = req;
+    const user = await User.findOne({_id: _id});
+    res.json({
+        success: true,
+        user
+    })
 }
 
 export const signup = async (req,res) => {

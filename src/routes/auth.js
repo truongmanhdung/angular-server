@@ -1,11 +1,12 @@
 import express from 'express';
 import {createOrUpdateUser, currentUser,signup,signin, signout, getUsers, updateUser} from "../controllers/AuthController";
+import { verifyToken } from '../middlewares/CheckAuth';
 
 const router = express.Router();
 
 
 router.post('/create-or-update-user', createOrUpdateUser);
-router.post('/current-user', currentUser);
+router.get('/current-user', verifyToken, currentUser);
 router.get("/users", getUsers);
 router.post("/signup",signup);
 router.post("/signin",signin);

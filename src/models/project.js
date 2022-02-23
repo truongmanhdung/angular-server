@@ -6,9 +6,6 @@ const projectSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    teamSize: {
-        type: Number
-    },
     member: [
         {
             userId: {

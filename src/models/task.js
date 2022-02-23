@@ -10,6 +10,10 @@ const taskSchema = new mongoose.Schema(
     desc: {
       type: String,
     },
+    status: {
+      type: String,
+      default: 'To-do'
+    },
     watcher: [
         {
             userId: {

@@ -2,7 +2,12 @@ import Project from "../models/project"
 
 export const getAllProject = async (req, res) => {
     try {
-        const Projects = await Project.find({})
+        const Projects = await Project.find({}).populate({
+            path: "member",
+            populate: {
+                path: "userId",
+            }
+        })
         res.status(200).json({
             success: true,
             Projects
@@ -16,7 +21,12 @@ export const getAllProject = async (req, res) => {
 export const getOneProject = async (req, res) => {
     console.log(req.params.id);
     try {
-        const project = await Project.findOne({_id: req.params.id})
+        const project = await Project.findOne({_id: req.params.id}).populate({
+            path: "member",
+            populate: {
+                path: "userId",
+            }
+        })
         res.status(200).json({
             success: true,
             project
