@@ -14,14 +14,10 @@ const taskSchema = new mongoose.Schema(
       type: String,
       default: 'To-do'
     },
-    watcher: [
-        {
-            userId: {
-                type: ObjectId,
-                ref: "Users"
-            }   
-        }
-    ],
+    performer: {
+      type: ObjectId,
+      ref: "Users"
+    },
     timeStart: {
       type: Date,
       default: new Date(),

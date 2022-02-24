@@ -6,12 +6,7 @@ export const getAllTask = async (req, res) => {
     if (projectId) {
       console.log("projectId", projectId);
       const tasks = await Task.find({ projectId })
-        .populate({
-          path: "watcher",
-          populate: {
-            path: "userId",
-          },
-        })
+        .populate("performer")
         .populate("projectId");
       res.status(200).json({
         success: true,
@@ -20,12 +15,7 @@ export const getAllTask = async (req, res) => {
     } else {
       const tasks = await Task.find({})
         .populate("projectId")
-        .populate({
-          path: "watcher",
-          populate: {
-            path: "userId",
-          },
-        });
+        .populate("performer");
       res.status(200).json({
         success: true,
         tasks,
@@ -60,12 +50,7 @@ export const getOneTask = async (req, res) => {
   console.log(req.params.id);
   try {
     const task = await Task.findOne({ _id: req.params.id }).populate("projectId")
-    .populate({
-      path: "watcher",
-      populate: {
-        path: "userId",
-      },
-    });
+    .populate("performer");
     res.status(200).json({
       success: true,
       task,
@@ -85,6 +70,29 @@ export const updateTask = async (req, res) => {
   try {
     const UpdateConditions = { _id: req.params.id, userId: req.userId };
     const updateTask = await Task.findOneAndUpdate(UpdateConditions, req.body, {
+      new: true,
+    });
+    if (!updateTask) {
+      return res.status(401).json({
+        success: false,
+        message: "User not authorised to update Task",
+      });
+    }
+    return res.status(200).json({
+      success: true,
+      message: "User updated Task successfully",
+      task: updateTask,
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: "Internal server error" });
+  }
+};
+
+export const updateStatus =  async (req, res) => {
+  const { status } = req.body;
+  try {
+    const UpdateConditions = { _id: req.params.id, userId: req.userId };
+    const updateTask = await Task.findOneAndUpdate(UpdateConditions, {status: status}, {
       new: true,
     });
     if (!updateTask) {

@@ -7,7 +7,7 @@ export const getAllProject = async (req, res) => {
             populate: {
                 path: "userId",
             }
-        })
+        })  
         res.status(200).json({
             success: true,
             Projects
